@@ -1,0 +1,9 @@
+$Id: Todo.txt,v 1.1 2005/11/13 22:00:49 gerrit-albrecht Exp $
+
+Known bugs, errors and limitations of the code:
+
+* 
+
+Possible future enhancements:
+
+* 
