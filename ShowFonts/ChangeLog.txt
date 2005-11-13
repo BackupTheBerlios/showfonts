@@ -1,3 +1,8 @@
+2005-11-14  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
+
+	* Font weight popup gets now initalized.
+	* Added editable font height combo box.
+
 2005-11-13  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
 
 	* Initial import.

@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.2 2005/11/13 22:35:56 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.3 2005/11/13 23:57:36 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -38,6 +38,8 @@ void CMainDialog::DoDataExchange(CDataExchange* pDX)
   CDialog::DoDataExchange(pDX);
   DDX_Control(pDX, IDC_FONTS_LIST, m_fonts_list);
   DDX_Control(pDX, IDC_EXAMPLE_TEXT, m_example_text);
+  DDX_Control(pDX, IDC_COMBO_WEIGHT, m_combo_weight);
+  DDX_Control(pDX, IDC_COMBO_HEIGHT, m_combo_height);
 }
 
 BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
@@ -47,6 +49,8 @@ BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
 	ON_WM_QUERYDRAGICON()
   ON_LBN_SELCHANGE(IDC_FONTS_LIST, OnLbnSelchangeFontsList)
   ON_CBN_SELCHANGE(IDC_COMBO_WEIGHT, OnCbnSelchangeComboWeight)
+  ON_CBN_SELCHANGE(IDC_COMBO_HEIGHT, OnCbnSelchangeComboHeight)
+  ON_CBN_EDITCHANGE(IDC_COMBO_HEIGHT, OnCbnEditchangeComboHeight)
 END_MESSAGE_MAP()
 
 
@@ -93,7 +97,8 @@ BOOL CMainDialog::OnInitDialog()
   m_weight   = FW_NORMAL;
   m_facename = "";
 
-  // TODO: Select default popup values in the top right area ...
+  m_combo_weight.SelectString(-1, "Normal");
+  m_combo_height.SelectString(-1, "50");
 
   if (m_fonts_list.GetCount() > 0) {
     m_fonts_list.SetCurSel(0);                   // Select first font in list.
@@ -253,16 +258,16 @@ void CMainDialog::OnCbnSelchangeComboWeight()
   cb->GetLBText(item, str.GetBuffer(len));
   str.ReleaseBuffer();
 
-  //AfxMessageBox(str, MB_OK);
-
-  if (str == "")
-    m_weight = FW_DONTCARE;
-  else if (str == "Normal")
-    m_weight = FW_NORMAL;
-  else if (str == "Ordentlich")
-    m_weight = FW_REGULAR;
-  else if (str == "Fett")
-    m_weight = FW_BOLD;
+  if (str == "")                   m_weight = FW_DONTCARE;
+  else if (str == "Dünn")          m_weight = FW_THIN;
+  else if (str == "Extra Leicht")  m_weight = FW_ULTRALIGHT;
+  else if (str == "Leicht")        m_weight = FW_LIGHT;
+  else if (str == "Normal")        m_weight = FW_NORMAL;
+  else if (str == "Mittel")        m_weight = FW_MEDIUM;
+  else if (str == "Fast Fett")     m_weight = FW_SEMIBOLD;
+  else if (str == "Fett")          m_weight = FW_BOLD;
+  else if (str == "Extra Fett")    m_weight = FW_ULTRABOLD;
+  else if (str == "Wuchtig")       m_weight = FW_HEAVY;
   else
     m_weight = FW_NORMAL;
 
@@ -329,4 +334,41 @@ BOOL CMainDialog::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
   }
 
   return CDialog::OnNotify(wParam, lParam, pResult);
+}
+
+void CMainDialog::OnCbnSelchangeComboHeight()
+{
+  CString str;
+  CComboBox *cb;
+  int item;
+  int len;
+
+  cb = (CComboBox *) GetDlgItem(IDC_COMBO_HEIGHT);
+  item = cb->GetCurSel();
+  len = cb->GetLBTextLen(item);
+  cb->GetLBText(item, str.GetBuffer(len));
+  str.ReleaseBuffer();
+
+  m_height = _ttoi(str);
+
+  if (m_height <= 0)
+    m_height = 1;
+
+  SetNewFont();
+}
+
+// Wird bei jedem Tastendruck aufgerufen.
+
+void CMainDialog::OnCbnEditchangeComboHeight()
+{
+  CString str;
+
+  m_combo_height.GetWindowText(str);
+
+  m_height = _ttoi(str);
+
+  if (m_height <= 0)
+    m_height = 1;
+
+  SetNewFont();
 }

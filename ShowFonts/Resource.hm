@@ -1,6 +1,7 @@
 // Microsoft Visual C++ generated Help ID include file.
 // Used by ShowFonts.rc
 //
+#define HIDC_COMBO_HEIGHT               0x806603ed    // IDD_SHOWFONTS_DIALOG
 #define HIDC_EXAMPLE_TEXT               0x806603e9    // IDD_SHOWFONTS_DIALOG
 #define HIDC_FONTS_LIST                 0x806603e8    // IDD_SHOWFONTS_DIALOG
 #define HIDC_STATIC_FILENAME            0x806603ea    // IDD_SHOWFONTS_DIALOG

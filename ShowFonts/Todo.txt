@@ -1,9 +1,13 @@
-$Id: Todo.txt,v 1.1 2005/11/13 22:00:49 gerrit-albrecht Exp $
+$Id: Todo.txt,v 1.2 2005/11/13 23:57:37 gerrit-albrecht Exp $
 
 Known bugs, errors and limitations of the code:
 
-* 
+* Retrieving the filename of a selected font is missing.
 
 Possible future enhancements:
 
-* 
+* Colors.
+* Font size.
+* Selecting a dir/file using a dialog or drag and drop.
+* Font categories to filter the list.
+* Predefined texts (e.g. all chars).

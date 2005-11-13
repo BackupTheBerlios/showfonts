@@ -1,4 +1,4 @@
-// $Id: MainDialog.h,v 1.1 2005/11/13 21:44:28 gerrit-albrecht Exp $
+// $Id: MainDialog.h,v 1.2 2005/11/13 23:57:36 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -53,12 +53,20 @@ class CMainDialog : public CDialog
     void SetNewFont();
 
   public:
-    afx_msg void OnLbnSelchangeFontsList();
-    CFont    m_font;
-    CListBox m_fonts_list;
+    CFont         m_font;
+    CListBox      m_fonts_list;
     CRichEditCtrl m_example_text;
+    CComboBox     m_combo_weight;
+    CComboBox     m_combo_height;
+
     afx_msg void OnCbnSelchangeComboWeight();
+    afx_msg void OnLbnSelchangeFontsList();
+    afx_msg void OnCbnSelchangeComboHeight();
+
     virtual BOOL PreTranslateMessage(MSG* pMsg);
-protected:
-  virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
+
+  protected:
+    virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
+public:
+  afx_msg void OnCbnEditchangeComboHeight();
 };
