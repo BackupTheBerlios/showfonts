@@ -1,4 +1,4 @@
-// $Id: StdAfx.h,v 1.1 2005/11/13 21:44:29 gerrit-albrecht Exp $
+// $Id: StdAfx.h,v 1.2 2005/11/13 22:35:56 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -23,6 +23,8 @@
 // die nur in unregelmäßigen Abständen geändert werden.
 
 #pragma once
+
+#define OEMRESOURCE
 
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN		// Selten verwendete Teile der Windows-Header nicht einbinden
@@ -59,3 +61,29 @@
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>			// MFC-Unterstützung für allgemeine Windows-Steuerelemente
 #endif // _AFX_NO_AFXCMN_SUPPORT
+
+#ifndef STRICT
+#define STRICT
+#endif
+
+// 98 or later
+#ifndef COLOR_HOTLIGHT  // hot track item
+#define COLOR_HOTLIGHT 26
+#endif
+
+#ifndef COLOR_GRADIENTACTIVECAPTION
+#define COLOR_GRADIENTACTIVECAPTION 27
+#endif
+
+#ifndef COLOR_GRADIENTINACTIVECAPTION
+#define COLOR_GRADIENTINACTIVECAPTION 28
+#endif
+
+// WinXP or later
+#ifndef COLOR_MENUHILIGHT
+#define COLOR_MENUHILIGHT 29
+#endif
+
+#ifndef COLOR_MENUBAR
+#define COLOR_MENUBAR 30
+#endif

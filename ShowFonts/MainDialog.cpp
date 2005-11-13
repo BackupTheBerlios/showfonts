@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.1 2005/11/13 21:44:28 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.2 2005/11/13 22:35:56 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -85,7 +85,7 @@ BOOL CMainDialog::OnInitDialog()
   SetIcon(m_hIcon, TRUE);                        // Großes Symbol verwenden.
   SetIcon(m_hIcon, FALSE);                       // Kleines Symbol verwenden.
 
-  m_example_text.SetWindowText("Das ist ein schöner Test-Text. 1234567890");
+  m_example_text.SetWindowText("Das ist ein schöner Test-Text.\n1234567890");
 
   GetFontsList();
 
@@ -159,7 +159,7 @@ HCURSOR CMainDialog::OnQueryDragIcon()
 void CMainDialog::GetFontsList()
 {
   LOGFONT  lf;
-  POSITION pos;
+  //POSITION pos;
   HDC      dc = ::GetDC(NULL);  // GetDC()->m_hDC
 
   memset(&lf, 0, sizeof(LOGFONT));        // Just to be sure: zero out structure.
