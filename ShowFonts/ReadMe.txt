@@ -1,3 +1,5 @@
+$Id: ReadMe.txt,v 1.2 2006/01/23 12:53:37 gerrit-albrecht Exp $
+
 ShowFonts
 
 http://showfonts.berlios.de/
