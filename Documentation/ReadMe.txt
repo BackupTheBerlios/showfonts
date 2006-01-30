@@ -1,4 +1,4 @@
-$Id: ReadMe.txt,v 1.2 2006/01/23 12:53:37 gerrit-albrecht Exp $
+$Id: ReadMe.txt,v 1.1 2006/01/30 10:12:12 gerrit-albrecht Exp $
 
 ShowFonts
 

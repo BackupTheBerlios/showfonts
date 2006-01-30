@@ -1,13 +1,13 @@
 //
-// ShowFonts.RC2 - Ressourcen, die Microsoft Visual C++ nicht direkt bearbeitet
+// ShowFonts.RC2 - resources Microsoft Visual C++ does not edit directly
 //
 
 #ifdef APSTUDIO_INVOKED
-#error Diese Datei kann nicht in Microsoft Visual C++ bearbeitet werden.
+#error this file is not editable by Microsoft Visual C++
 #endif //APSTUDIO_INVOKED
 
 
 /////////////////////////////////////////////////////////////////////////////
-// Fügen Sie hier manuell bearbeitete Ressourcen hinzu...
+// Add manually edited resources here...
 
 /////////////////////////////////////////////////////////////////////////////

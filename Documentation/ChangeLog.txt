@@ -1,3 +1,9 @@
+$Id: ChangeLog.txt,v 1.1 2006/01/30 10:12:12 gerrit-albrecht Exp $
+
+2006-01-30  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
+
+	* Converted the project into the Visual Studio 2005 format.
+
 2005-11-14  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
 
 	* Font weight popup gets now initalized.
