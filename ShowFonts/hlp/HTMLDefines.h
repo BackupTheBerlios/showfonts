@@ -1,13 +1,19 @@
  
 // Commands (ID_* and IDM_*) 
 #define HIDM_ABOUTBOX                           0x10010
+#define HID_X_C                                 0x18003
+#define HID_X_D                                 0x18004
+#define HID_CUSTOM_FONT_DIR                     0x18005
+#define HID_SYSTEM_FONT_DIR                     0x18006
  
 // Prompts (IDP_*) 
 #define HIDP_OLE_INIT_FAILED                    0x30064
 #define HIDP_SOCKETS_INIT_FAILED                0x30067
  
 // Resources (IDR_*) 
+#define HIDR_MENU_FONT_LIST                     0x20004
 #define HIDR_MAINFRAME                          0x20080
+#define HIDR_MENU1                              0x20081
  
 // Dialogs (IDD_*) 
 #define HIDD_ABOUTBOX                           0x20064

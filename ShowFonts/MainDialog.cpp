@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.6 2006/01/30 14:19:59 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.7 2006/01/30 15:10:37 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -53,6 +53,9 @@ BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
     ON_LBN_SELCHANGE(IDC_FONTS_LIST, &CMainDialog::OnLbnSelchangeFontsList)
+    ON_CBN_SELCHANGE(IDC_COMBO_WEIGHT, &CMainDialog::OnCbnSelchangeComboWeight)
+    ON_CBN_SELCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnSelchangeComboHeight)
+    ON_CBN_EDITCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnEditchangeComboHeight)
 END_MESSAGE_MAP()
 
 BOOL CMainDialog::OnInitDialog()
@@ -232,4 +235,89 @@ void CMainDialog::OnLbnSelchangeFontsList()
     afxDump << s;
   }
   #endif
+}
+
+void CMainDialog::OnCbnSelchangeComboWeight()
+{
+}
+
+void CMainDialog::OnCbnSelchangeComboHeight()
+{
+}
+
+BOOL CMainDialog::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+  if (wParam == IDC_EXAMPLE_TEXT) {
+    MSGFILTER *lpMsgFilter = (MSGFILTER *) lParam;
+
+    if ( (lpMsgFilter->nmhdr.code == EN_MSGFILTER) &&
+         (lpMsgFilter->msg == WM_RBUTTONDOWN) ) {
+      afxDump << "Catched a reflected message.\n";
+
+
+    }
+  }
+
+  return CDialog::OnNotify(wParam, lParam, pResult);
+}
+
+BOOL CMainDialog::PreTranslateMessage(MSG* pMsg)
+{
+  if (pMsg->message == WM_RBUTTONDOWN) {
+    CWnd *win = (CWnd *) GetDlgItem(IDC_FONTS_LIST);
+
+    CRect rect;
+    win->GetWindowRect(rect);
+
+    #ifdef _DEBUG
+      afxDump << pMsg->pt.x << " " << pMsg->pt.y << "\n";
+      afxDump << rect.left << " " << rect.top << " " << rect.right << " " << rect.bottom << "\n";
+    #endif
+
+    if (rect.PtInRect(pMsg->pt)) {
+      CMenu menu;
+      DWORD selection;
+
+      VERIFY(menu.LoadMenu(IDR_MENU_FONT_LIST));
+
+      CMenu *popup = menu.GetSubMenu(0);
+      ASSERT(popup != NULL);
+
+      selection = popup->TrackPopupMenu((TPM_LEFTALIGN | TPM_LEFTBUTTON |
+                                         TPM_NONOTIFY | TPM_RETURNCMD),
+                                        pMsg->pt.x, pMsg->pt.y, this);
+      popup->DestroyMenu();
+
+      switch (selection) {
+        case 0:
+          break;
+
+        case ID_CUSTOM_FONT_DIR:
+          break;
+
+        case ID_SYSTEM_FONT_DIR:
+          break;
+      }
+
+      return TRUE;
+    }
+  }
+
+  return CDialog::PreTranslateMessage(pMsg);
+}
+
+// Wird bei jedem Tastendruck aufgerufen.
+
+void CMainDialog::OnCbnEditchangeComboHeight()
+{
+  CString str;
+
+  m_combo_height.GetWindowText(str);
+
+  m_height = _ttoi(str);
+
+  if (m_height <= 0)
+    m_height = 1;
+
+  SetNewFont();
 }

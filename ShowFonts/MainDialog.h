@@ -1,4 +1,4 @@
-// $Id: MainDialog.h,v 1.5 2006/01/30 14:19:59 gerrit-albrecht Exp $
+// $Id: MainDialog.h,v 1.6 2006/01/30 15:10:37 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -58,4 +58,14 @@ class CMainDialog : public CDialog
 
   public:
     afx_msg void OnLbnSelchangeFontsList();
+public:
+    afx_msg void OnCbnSelchangeComboWeight();
+public:
+    afx_msg void OnCbnSelchangeComboHeight();
+protected:
+    virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
+public:
+    virtual BOOL PreTranslateMessage(MSG* pMsg);
+public:
+    afx_msg void OnCbnEditchangeComboHeight();
 };

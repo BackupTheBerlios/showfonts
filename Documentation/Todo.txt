@@ -1,4 +1,4 @@
-$Id: Todo.txt,v 1.1 2006/01/30 10:12:12 gerrit-albrecht Exp $
+$Id: Todo.txt,v 1.2 2006/01/30 15:10:37 gerrit-albrecht Exp $
 
 Known bugs, errors and limitations of the code:
 
@@ -11,3 +11,8 @@ Possible future enhancements:
 * Selecting a dir/file using a dialog or drag and drop.
 * Font categories to filter the list.
 * Predefined texts (e.g. all chars).
+* Resizable dialog.
+* Pasting own texts into the Editor.
+* Predefined Codepages.
+* Font property editor.
+* Print font overview.
