@@ -1,6 +1,30 @@
-// stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently,
-// but are changed infrequently
+// $Id: StdAfx.h,v 1.4 2006/01/30 14:19:59 gerrit-albrecht Exp $
+//
+// ShowFonts
+// Copyright (C) 2005 by Gerrit M. Albrecht
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+// MA 02110-1301, USA.
+
+// Quelltextdatei, die nur die Standard-Includes einbindet.
+// ShowFonts.pch ist der vorcompilierte Header.
+// StdAfx.obj enthält die vorcompilierte Typinformation.
+
+// Include file for standard system include files,
+// or project specific include files that are used
+// frequently, but are changed infrequently.
 
 #pragma once
 
@@ -37,11 +61,7 @@
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
-
-
 #include <afxdisp.h>        // MFC Automation classes
-
-
 
 #ifndef _AFX_NO_OLE_SUPPORT
 #include <afxdtctl.h>		// MFC support for Internet Explorer 4 Common Controls
@@ -52,11 +72,6 @@
 
 
 #include <afxsock.h>		// MFC socket extensions
-
-
-
-
-
 
 
 #ifdef _UNICODE
@@ -70,5 +85,3 @@
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
 #endif
-
-

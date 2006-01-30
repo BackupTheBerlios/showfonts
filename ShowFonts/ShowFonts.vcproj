@@ -367,5 +367,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="ShowFonts.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

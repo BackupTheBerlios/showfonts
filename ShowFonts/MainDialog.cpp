@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.5 2006/01/30 10:47:51 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.6 2006/01/30 14:19:59 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -28,16 +28,23 @@
 #endif
 
 CMainDialog::CMainDialog(CWnd* pParent /*=NULL*/)
-	: CDialog(CMainDialog::IDD, pParent)
+ : CDialog(CMainDialog::IDD, pParent)
 {
   EnableActiveAccessibility();
 
-  m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+  m_icon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CMainDialog::DoDataExchange(CDataExchange* pDX)
 {
   CDialog::DoDataExchange(pDX);
+
+  DDX_Control(pDX, IDC_FONTS_LIST, m_fonts_list);
+  DDX_Control(pDX, IDC_EXAMPLE_TEXT, m_example_text);
+  DDX_Control(pDX, IDC_COMBO_WEIGHT, m_combo_weight);
+  DDX_Control(pDX, IDC_COMBO_HEIGHT, m_combo_height);
+  DDX_Control(pDX, IDC_SPIN_WEIGHT, m_spin_weight);
+  DDX_Control(pDX, IDC_SPIN_HEIGHT, m_spin_height);
 }
 
 BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
@@ -45,36 +52,60 @@ BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
+    ON_LBN_SELCHANGE(IDC_FONTS_LIST, &CMainDialog::OnLbnSelchangeFontsList)
 END_MESSAGE_MAP()
 
 BOOL CMainDialog::OnInitDialog()
 {
   CDialog::OnInitDialog();
 
-	// Add "About..." menu item to system menu.
+  // IDM_ABOUTBOX must be in the system command range.
 
-	// IDM_ABOUTBOX must be in the system command range.
-	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
-	ASSERT(IDM_ABOUTBOX < 0xF000);
+  ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
+  ASSERT(IDM_ABOUTBOX < 0xF000);
 
-	CMenu* pSysMenu = GetSystemMenu(FALSE);
-	if (pSysMenu != NULL) {
-		CString strAboutMenu;
-		strAboutMenu.LoadString(IDS_ABOUTBOX);
-		if (!strAboutMenu.IsEmpty()) {
-			pSysMenu->AppendMenu(MF_SEPARATOR);
-			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
-		}
-	}
+  // Add "About..." menu item to system menu.
 
-	// Set the icon for this dialog.  The framework does this automatically
-	//  when the application's main window is not a dialog
-	SetIcon(m_hIcon, TRUE);			// Set big icon
-	SetIcon(m_hIcon, FALSE);		// Set small icon
+  CMenu* pSysMenu = GetSystemMenu(FALSE);
+  if (pSysMenu != NULL) {
+    CString strAboutMenu;
 
-	// TODO: Add extra initialization here
+    strAboutMenu.LoadString(IDS_ABOUTBOX);
+    if (!strAboutMenu.IsEmpty()) {
+      pSysMenu->AppendMenu(MF_SEPARATOR);
+      pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+    }
+  }
 
-	return TRUE;  // return TRUE  unless you set the focus to a control
+  // Set the icon for this dialog. The framework does this automatically
+  // when the application's main window is not a dialog.
+
+  SetIcon(m_icon, TRUE);                                             // Set big icon.
+  SetIcon(m_icon, FALSE);                                            // Set small icon.
+
+  // Tell our Rich-Text field that it shall reflect its messages
+  // to this dialog. I'm to lazy to make a subclass.
+
+  m_example_text.SetEventMask(ENM_MOUSEEVENTS);
+
+  m_example_text.SetWindowText(_T("Das ist ein schöner Test-Text.\n1234567890"));
+
+  GetFontsList();
+
+  m_height   = 50;
+  m_weight   = FW_NORMAL;
+  m_facename = _T("");
+
+  m_combo_weight.SelectString(-1, _T("Normal"));
+  m_combo_height.SelectString(-1, _T("50"));
+
+  if (m_fonts_list.GetCount() > 0) {
+    m_fonts_list.SetCurSel(0);                                       // Select first font in list.
+
+    OnLbnSelchangeFontsList();
+  }
+
+  return TRUE;                                                       // Return TRUE, unless you set the focus to a control.
 }
 
 void CMainDialog::OnSysCommand(UINT nID, LPARAM lParam)
@@ -102,18 +133,103 @@ void CMainDialog::OnPaint()
     int cyIcon = GetSystemMetrics(SM_CYICON);
     CRect rect;
     GetClientRect(&rect);
-    int x = (rect.Width() - cxIcon + 1) / 2;
+    int x = (rect.Width()  - cxIcon + 1) / 2;
     int y = (rect.Height() - cyIcon + 1) / 2;
 
-    dc.DrawIcon(x, y, m_hIcon);                                      // Draw the icon.
+    dc.DrawIcon(x, y, m_icon);                                       // Draw the icon.
   } else {
     CDialog::OnPaint();
   }
 }
 
-// The system calls this function to obtain the cursor to display while the user drags  the minimized window.
+// The system calls this function to obtain the cursor to display
+// while the user drags the minimized window.
 
 HCURSOR CMainDialog::OnQueryDragIcon()
 {
-  return static_cast<HCURSOR>(m_hIcon);
+  return static_cast<HCURSOR>(m_icon);
+}
+
+void CMainDialog::GetFontsList()
+{
+  LOGFONT  lf;
+  //POSITION pos;
+  HDC      dc = ::GetDC(NULL);  // GetDC()->m_hDC
+
+  memset(&lf, 0, sizeof(LOGFONT));        // Just to be sure: zero out structure.
+
+  //m_fonts_list Clearing ...
+
+  lf.lfCharSet = ANSI_CHARSET;
+  lf.lfFaceName[0] = '\0';
+  //*lf.lfFaceName = 0;
+  //lf.lfPitchAndFamily = 0;
+
+  ::EnumFontFamiliesEx(dc, &lf, (FONTENUMPROC) CMainDialog::EnumFontFamExProc, 
+                       (LPARAM) &m_fonts_list, 0);
+
+  ::ReleaseDC(NULL, dc);
+
+  //for (pos = fontlist.GetHeadPosition(); pos != NULL;)
+  //  this->AddString(fontlist.GetNext(pos));
+}
+
+int CALLBACK CMainDialog::EnumFontFamExProc(ENUMLOGFONTEX *lpelfe,
+                                            NEWTEXTMETRICEX *lpntme,
+                                            int FontType, LPARAM lParam)
+{
+  //CStringList* m_temp = (CStringList*) lParam;
+  //m_temp->AddTail((char*)lpelfe->elfFullName);
+
+  CListBox *fonts_list = reinterpret_cast<CListBox *>(lParam);
+
+  fonts_list->AddString((LPCTSTR) (lpelfe->elfFullName));
+
+  return 1;                                                          // I want to get all fonts.
+}
+
+void CMainDialog::SetNewFont()
+{
+  CFont font;
+
+  font.CreateFont(m_height, 0, 0, 0, m_weight, FALSE, FALSE, FALSE, DEFAULT_CHARSET /*ANSI_CHARSET*/,
+    OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
+    DEFAULT_PITCH | FF_SWISS /*FF_DONTCARE*/, m_facename.GetBuffer(0));
+
+  m_example_text.SetFont(&font, TRUE);
+
+  #ifdef _DEBUG
+  {
+    LOGFONT lf;
+    font.GetLogFont(&lf);
+    TRACE("  Typeface = %s\n", lf.lfFaceName);
+    TRACE("  Charset = %d\n", lf.lfCharSet);
+  }
+  #endif
+
+  font.DeleteObject();
+}
+
+void CMainDialog::OnLbnSelchangeFontsList()
+{
+  CString str;
+  int sel, len;
+
+  sel = m_fonts_list.GetCurSel();
+  len = m_fonts_list.GetTextLen(sel);
+
+  m_fonts_list.GetText(sel, str.GetBuffer(len));
+  str.ReleaseBuffer();
+
+  m_facename = str;
+
+  SetNewFont();
+
+  #ifdef _DEBUG
+  {
+    CString s;
+    s.Format(_T("item %d: %s\n"), sel, str.GetBuffer());
+    afxDump << s;
+  }
+  #endif
 }

@@ -1,4 +1,4 @@
-// $Id: ShowFonts.h,v 1.3 2006/01/30 10:47:51 gerrit-albrecht Exp $
+// $Id: ShowFonts.h,v 1.4 2006/01/30 14:19:59 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -31,10 +31,10 @@ class CShowFonts : public CWinApp
   public:
     CShowFonts();
 
-  public:
     virtual BOOL InitInstance();
 
-  DECLARE_MESSAGE_MAP()
+  public:
+    DECLARE_MESSAGE_MAP()
 };
 
 extern CShowFonts theApp;
