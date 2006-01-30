@@ -2,11 +2,6 @@
 //
 #include "resource.h"
 
-// Generated Help ID header file
-#define APSTUDIO_HIDDEN_SYMBOLS
-#include "resource.hm"
-#undef APSTUDIO_HIDDEN_SYMBOLS
-
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -18,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Deutsch (Deutschland) resources
+// German (Germany) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
 #ifdef _WIN32
@@ -53,8 +48,8 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)\r\n"
     "LANGUAGE 7, 1\r\n"
     "#pragma code_page(1252)\r\n"
-    "#include ""res\\ShowFonts.rc2""  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen\r\n"
-    "#include ""afxres.rc""         // Standardkomponenten\r\n"
+    "#include ""res\\ShowFonts.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
     "#endif\r\n"
     "\0"
 END
@@ -76,46 +71,27 @@ IDR_MAINFRAME           ICON                    "res\\ShowFonts.ico"
 // Dialog
 //
 
-IDD_ABOUT_DIALOG DIALOGEX 0, 0, 330, 196
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
-CAPTION "Über ShowFonts:"
+IDD_ABOUT DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About ShowFonts"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,12,12,18,16
-    LTEXT           "ShowFonts Version 1.0",IDC_STATIC,96,12,180,8,
-                    SS_NOPREFIX
-    LTEXT           "Copyright (c) 2005 Gerrit M. Albrecht",IDC_STATIC,96,24,
-                    180,8
-    DEFPUSHBUTTON   "&Okay",IDOK,139,168,50,16,WS_GROUP
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "ShowFonts Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2006",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
 END
 
-IDD_SHOWFONTS_DIALOG DIALOGEX 0, 0, 487, 228
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | 
-    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-EXSTYLE WS_EX_ACCEPTFILES | WS_EX_CONTEXTHELP | WS_EX_APPWINDOW
+IDD_SHOWFONTS DIALOGEX 0, 0, 320, 200
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
 CAPTION "ShowFonts"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    PUSHBUTTON      "&Okay",IDOK,426,204,54,18
-    PUSHBUTTON      "&Hilfe",ID_HELP,366,204,54,18
-    LISTBOX         IDC_FONTS_LIST,7,7,149,215,LBS_SORT | 
-                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,0,
-                    HIDC_FONTS_LIST
-    RTEXT           "Dateiname:",IDC_STATIC,288,6,60,12
-    CONTROL         "xxx",IDC_STATIC_FILENAME,"Static",SS_LEFTNOWORDWRAP | 
-                    SS_ENDELLIPSIS | WS_BORDER | WS_GROUP,354,6,126,12,0,
-                    HIDC_STATIC_FILENAME
-    CONTROL         "",IDC_EXAMPLE_TEXT,"RichEdit20A",ES_MULTILINE | 
-                    ES_AUTOHSCROLL | ES_WANTRETURN | WS_BORDER | WS_TABSTOP,
-                    162,96,318,102,0,HIDC_EXAMPLE_TEXT
-    COMBOBOX        IDC_COMBO_WEIGHT,354,24,126,114,CBS_DROPDOWNLIST | 
-                    WS_VSCROLL | WS_TABSTOP
-    RTEXT           "Gewicht:",IDC_STATIC,288,24,60,12
-    COMBOBOX        IDC_COMBO_HEIGHT,354,42,102,114,CBS_DROPDOWN | 
-                    WS_VSCROLL | WS_TABSTOP,0,HIDC_COMBO_HEIGHT
-    RTEXT           "Größe:",IDC_STATIC,288,42,60,12
-    LTEXT           "Pixel",IDC_STATIC,462,42,18,12
+    DEFPUSHBUTTON   "OK",IDOK,263,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,263,25,50,16
+    PUSHBUTTON      "&Help",ID_HELP,263,44,50,16
+    CTEXT           "TODO: Place dialog controls here.",IDC_STATIC,10,96,300,8
 END
 
 
@@ -139,13 +115,13 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "040704e4"
+        BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "Gerrit Albrecht Softwareentwicklung und Internetdienstleistungen (G.A.S.I.)"
-            VALUE "Copyright (C) 2005", "(c) 2005 G.A.S.I. Alle Rechte vorbehalten."
-            VALUE "FileDescription", "Zeigt und verwaltet Schriftarten."
+            VALUE "CompanyName", "Gerrit M. Albrecht Softwareentwicklung und Internetdienstleistungen"
+            VALUE "FileDescription", "Font manager"
             VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "ShowFonts.exe"
+            VALUE "LegalCopyright", "(c) 2006 Gerrit M. Albrecht.  All rights reserved."
             VALUE "OriginalFilename", "ShowFonts.exe"
             VALUE "ProductName", "ShowFonts"
             VALUE "ProductVersion", "1.0.0.1"
@@ -153,7 +129,7 @@ BEGIN
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x407, 1252
+        VALUE "Translation", 0x409, 1252
     END
 END
 
@@ -166,20 +142,20 @@ END
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO 
 BEGIN
-    IDD_ABOUT_DIALOG, DIALOG
+    IDD_ABOUT, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 323
+        RIGHTMARGIN, 228
         TOPMARGIN, 7
-        BOTTOMMARGIN, 189
+        BOTTOMMARGIN, 48
     END
 
-    IDD_SHOWFONTS_DIALOG, DIALOG
+    IDD_SHOWFONTS, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 480
+        RIGHTMARGIN, 313
         TOPMARGIN, 7
-        BOTTOMMARGIN, 221
+        BOTTOMMARGIN, 193
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -187,136 +163,17 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Dialog Info
-//
-
-IDD_SHOWFONTS_DIALOG DLGINIT
-BEGIN
-    IDC_COMBO_WEIGHT, 0x403, 1, 0
-"\000" 
-    IDC_COMBO_WEIGHT, 0x403, 5, 0
-0xfc44, 0x6e6e, "\000" 
-    IDC_COMBO_WEIGHT, 0x403, 13, 0
-0x7845, 0x7274, 0x2061, 0x654c, 0x6369, 0x7468, "\000" 
-    IDC_COMBO_WEIGHT, 0x403, 7, 0
-0x654c, 0x6369, 0x7468, "\000" 
-    IDC_COMBO_WEIGHT, 0x403, 7, 0
-0x6f4e, 0x6d72, 0x6c61, "\000" 
-    IDC_COMBO_WEIGHT, 0x403, 7, 0
-0x694d, 0x7474, 0x6c65, "\000" 
-    IDC_COMBO_WEIGHT, 0x403, 10, 0
-0x6146, 0x7473, 0x4620, 0x7465, 0x0074, 
-    IDC_COMBO_WEIGHT, 0x403, 5, 0
-0x6546, 0x7474, "\000" 
-    IDC_COMBO_WEIGHT, 0x403, 11, 0
-0x7845, 0x7274, 0x2061, 0x6546, 0x7474, "\000" 
-    IDC_COMBO_WEIGHT, 0x403, 8, 0
-0x7557, 0x6863, 0x6974, 0x0067, 
-    IDC_COMBO_HEIGHT, 0x403, 2, 0
-0x0037, 
-    IDC_COMBO_HEIGHT, 0x403, 2, 0
-0x0038, 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3031, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3231, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3431, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3631, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3032, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3432, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3633, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3035, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3036, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3037, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3038, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 3, 0
-0x3039, "\000" 
-    IDC_COMBO_HEIGHT, 0x403, 4, 0
-0x3031, 0x0030, 
-    IDC_COMBO_HEIGHT, 0x403, 4, 0
-0x3231, 0x0030, 
-    0
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Menu
-//
-
-IDR_MENU_FONT_LIST MENU 
-BEGIN
-    POPUP "Test"
-    BEGIN
-        MENUITEM "&Verzeichnis ...",            ID_CUSTOM_FONT_DIR
-        MENUITEM "&System-Schriftarten",        ID_SYSTEM_FONT_DIR
-    END
-END
-
-IDR_MENU_EXAMPLE_TEXT MENU 
-BEGIN
-    POPUP "Example-Text-Popup-Menü"
-    BEGIN
-        MENUITEM "&Normal",                     ID_EXAMPLE_NORMAL
-        MENUITEM "&ANSI",                       ID_EXAMPLE_ANSI
-        MENUITEM "&Fuchs",                      ID_EXAMPLE_FUCHS
-        MENUITEM SEPARATOR
-        MENUITEM "&Löschen",                    ID_EXAMPLE_CLEAR
-    END
-END
-
-IDR_MENU_DIALOG MENU 
-BEGIN
-    POPUP "MainDialog-Kontextmenü"
-    BEGIN
-        MENUITEM "&Schließen",                  1
-    END
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // String Table
 //
 
 STRINGTABLE 
 BEGIN
-    IDS_ABOUT_DIALOG        "&Info über ShowFonts..."
+    IDP_OLE_INIT_FAILED     "OLE initialization failed.  Make sure that the OLE libraries are the correct version."
+    IDS_ABOUTBOX            "&About ShowFonts..."
+    IDP_SOCKETS_INIT_FAILED "Windows sockets initialization failed."
 END
 
-#endif    // Deutsch (Deutschland) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// Englisch (USA) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
-LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
-#pragma code_page(1252)
-#endif //_WIN32
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// String Table
-//
-
-STRINGTABLE 
-BEGIN
-    IDS_ABOUT_DIALOG        "&Info über ShowFonts..."
-END
-
-#endif    // Englisch (USA) resources
+#endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -334,8 +191,8 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
 LANGUAGE 7, 1
 #pragma code_page(1252)
-#include "res\ShowFonts.rc2"  // Nicht mit Microsoft Visual C++ bearbeitete Ressourcen
-#include "afxres.rc"         // Standardkomponenten
+#include "res\ShowFonts.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

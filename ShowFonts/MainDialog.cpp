@@ -1,374 +1,152 @@
-// $Id: MainDialog.cpp,v 1.3 2005/11/13 23:57:36 gerrit-albrecht Exp $
+// MainDialog.cpp : implementation file
 //
-// ShowFonts
-// Copyright (C) 2005 by Gerrit M. Albrecht
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-// MA 02110-1301, USA.
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ShowFonts.h"
 #include "MainDialog.h"
-#include "AboutDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
+
+// CAboutDlg dialog used for App About
+
+class CAboutDlg : public CDialog
+{
+public:
+	CAboutDlg();
+
+// Dialog Data
+	enum { IDD = IDD_ABOUTBOX };
+
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+// Implementation
+protected:
+	DECLARE_MESSAGE_MAP()
+};
+
+CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
+{
+	EnableActiveAccessibility();
+}
+
+void CAboutDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+}
+
+BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
+END_MESSAGE_MAP()
+
+
+// CMainDialog dialog
+
+
+
+
 CMainDialog::CMainDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CMainDialog::IDD, pParent)
 {
+	EnableActiveAccessibility();
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CMainDialog::DoDataExchange(CDataExchange* pDX)
 {
-  CDialog::DoDataExchange(pDX);
-  DDX_Control(pDX, IDC_FONTS_LIST, m_fonts_list);
-  DDX_Control(pDX, IDC_EXAMPLE_TEXT, m_example_text);
-  DDX_Control(pDX, IDC_COMBO_WEIGHT, m_combo_weight);
-  DDX_Control(pDX, IDC_COMBO_HEIGHT, m_combo_height);
+	CDialog::DoDataExchange(pDX);
 }
 
 BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
 	ON_WM_SYSCOMMAND()
-	ON_WM_DESTROY()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-  ON_LBN_SELCHANGE(IDC_FONTS_LIST, OnLbnSelchangeFontsList)
-  ON_CBN_SELCHANGE(IDC_COMBO_WEIGHT, OnCbnSelchangeComboWeight)
-  ON_CBN_SELCHANGE(IDC_COMBO_HEIGHT, OnCbnSelchangeComboHeight)
-  ON_CBN_EDITCHANGE(IDC_COMBO_HEIGHT, OnCbnEditchangeComboHeight)
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 
-// CMainDialog Meldungshandler
+// CMainDialog message handlers
 
 BOOL CMainDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// Hinzufügen des Menübefehls "Info..." zum Systemmenü.
+	// Add "About..." menu item to system menu.
 
-	// IDM_ABOUTBOX muss sich im Bereich der Systembefehle befinden.
-	ASSERT((IDM_ABOUT_DIALOG & 0xFFF0) == IDM_ABOUT_DIALOG);
-	ASSERT(IDM_ABOUT_DIALOG < 0xF000);
+	// IDM_ABOUTBOX must be in the system command range.
+	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
+	ASSERT(IDM_ABOUTBOX < 0xF000);
 
-	CMenu *pSysMenu = GetSystemMenu(FALSE);
-	if (pSysMenu != NULL) {
+	CMenu* pSysMenu = GetSystemMenu(FALSE);
+	if (pSysMenu != NULL)
+	{
 		CString strAboutMenu;
-
-    strAboutMenu.LoadString(IDS_ABOUT_DIALOG);
-
-    if (!strAboutMenu.IsEmpty()) {
+		strAboutMenu.LoadString(IDS_ABOUTBOX);
+		if (!strAboutMenu.IsEmpty())
+		{
 			pSysMenu->AppendMenu(MF_SEPARATOR);
-			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUT_DIALOG, strAboutMenu);
+			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
 		}
 	}
 
-  // Tell our Rich-Text field that it shall reflect its messages
-  // to this dialog. I'm to lazy to make a subclass.
+	// Set the icon for this dialog.  The framework does this automatically
+	//  when the application's main window is not a dialog
+	SetIcon(m_hIcon, TRUE);			// Set big icon
+	SetIcon(m_hIcon, FALSE);		// Set small icon
 
-  m_example_text.SetEventMask(ENM_MOUSEEVENTS);
+	// TODO: Add extra initialization here
 
-  // Symbol für dieses Dialogfeld festlegen. Wird sonst automatisch
-  // erledigt wenn das Hauptfenster der Anwendung kein Dialogfeld ist.
-
-  SetIcon(m_hIcon, TRUE);                        // Großes Symbol verwenden.
-  SetIcon(m_hIcon, FALSE);                       // Kleines Symbol verwenden.
-
-  m_example_text.SetWindowText("Das ist ein schöner Test-Text.\n1234567890");
-
-  GetFontsList();
-
-  m_height   = 50;
-  m_weight   = FW_NORMAL;
-  m_facename = "";
-
-  m_combo_weight.SelectString(-1, "Normal");
-  m_combo_height.SelectString(-1, "50");
-
-  if (m_fonts_list.GetCount() > 0) {
-    m_fonts_list.SetCurSel(0);                   // Select first font in list.
-
-    OnLbnSelchangeFontsList();
-  }
-
-  return TRUE;  // Geben Sie TRUE zurück, außer ein Steuerelement soll den Fokus erhalten.
+	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
 void CMainDialog::OnSysCommand(UINT nID, LPARAM lParam)
 {
-	if ((nID & 0xFFF0) == IDM_ABOUT_DIALOG) {
-		CAboutDialog dialog;
-		dialog.DoModal();
+	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
+	{
+		CAboutDlg dlgAbout;
+		dlgAbout.DoModal();
 	}
-	else {
+	else
+	{
 		CDialog::OnSysCommand(nID, lParam);
 	}
 }
 
-void CMainDialog::OnDestroy()
-{
-	WinHelp(0L, HELP_QUIT);
-
-  CDialog::OnDestroy();
-}
-
-// Wenn Sie dem Dialogfeld eine Schaltfläche "Minimieren" hinzufügen, benötigen Sie 
-// den nachstehenden Code, um das Symbol zu zeichnen. Für MFC-Anwendungen, die das 
-// Dokument/Ansicht-Modell verwenden, wird dies automatisch ausgeführt.
+// If you add a minimize button to your dialog, you will need the code below
+//  to draw the icon.  For MFC applications using the document/view model,
+//  this is automatically done for you by the framework.
 
 void CMainDialog::OnPaint()
 {
-  if (IsIconic()) {
-    CPaintDC dc(this);                           // Gerätekontext zum Zeichnen.
+	if (IsIconic())
+	{
+		CPaintDC dc(this); // device context for painting
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		int cxIcon = GetSystemMetrics(SM_CXICON);    // Symbol in Clientrechteck zentrieren.
+		// Center icon in client rectangle
+		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
 		GetClientRect(&rect);
-		int x = (rect.Width()  - cxIcon + 1) / 2;
+		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-    dc.DrawIcon(x, y, m_hIcon);                  // Symbol zeichnen.
+		// Draw the icon
+		dc.DrawIcon(x, y, m_hIcon);
 	}
-	else {
+	else
+	{
 		CDialog::OnPaint();
 	}
 }
 
-// Die System ruft diese Funktion auf, um den Cursor abzufragen,
-// der angezeigt wird, während der Benutzer das minimierte Fenster
-// mit der Maus zieht.
-
+// The system calls this function to obtain the cursor to display while the user drags
+//  the minimized window.
 HCURSOR CMainDialog::OnQueryDragIcon()
 {
-  return static_cast<HCURSOR>(m_hIcon);
+	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CMainDialog::GetFontsList()
-{
-  LOGFONT  lf;
-  //POSITION pos;
-  HDC      dc = ::GetDC(NULL);  // GetDC()->m_hDC
-
-  memset(&lf, 0, sizeof(LOGFONT));        // Just to be sure: zero out structure.
-
-  //m_fonts_list Clearing ...
-
-  lf.lfCharSet = ANSI_CHARSET;
-  lf.lfFaceName[0] = '\0';
-  //*lf.lfFaceName = 0;
-  //lf.lfPitchAndFamily = 0;
-
-  ::EnumFontFamiliesEx(dc, &lf, (FONTENUMPROC) CMainDialog::EnumFontFamExProc, 
-                       (LPARAM) &m_fonts_list, 0);
-
-  ::ReleaseDC(NULL, dc);
-
-  //for (pos = fontlist.GetHeadPosition(); pos != NULL;)
-  //  this->AddString(fontlist.GetNext(pos));
-}
-
-int CALLBACK CMainDialog::EnumFontFamExProc(ENUMLOGFONTEX *lpelfe,
-                                            NEWTEXTMETRICEX *lpntme,
-                                            int FontType, LPARAM lParam)
-{
-  //CStringList* m_temp = (CStringList*) lParam;
-  //m_temp->AddTail((char*)lpelfe->elfFullName);
-
-  CListBox *fonts_list = reinterpret_cast<CListBox *>(lParam);
-
-  fonts_list->AddString((LPCTSTR) (lpelfe->elfFullName));
-
-  return 1;                                      // I want to get all fonts.
-}
-
-void CMainDialog::SetNewFont()
-{
-  CFont font;
-
-  font.CreateFont(m_height, 0, 0, 0, m_weight, FALSE, FALSE, FALSE, DEFAULT_CHARSET /*ANSI_CHARSET*/,
-    OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-    DEFAULT_PITCH | FF_SWISS /*FF_DONTCARE*/, m_facename.GetBuffer(0));
-
-  m_example_text.SetFont(&font, TRUE);
-
-  #ifdef _DEBUG
-  {
-    LOGFONT lf;
-    font.GetLogFont(&lf);
-    TRACE("  Typeface = %s\n", lf.lfFaceName);
-    TRACE("  Charset = %d\n", lf.lfCharSet);
-  }
-  #endif
-
-  font.DeleteObject();
-}
-
-void CMainDialog::OnLbnSelchangeFontsList()
-{
-  CString str;
-  int sel, len;
-
-  sel = m_fonts_list.GetCurSel();
-  len = m_fonts_list.GetTextLen(sel);
-
-  m_fonts_list.GetText(sel, str.GetBuffer(len));
-  str.ReleaseBuffer();
-
-  m_facename = str;
-
-  SetNewFont();
-
-  #ifdef _DEBUG
-  {
-    CString s;
-    s.Format(_T("item %d: %s\n"), sel, str.GetBuffer());
-    afxDump << s;
-  }
-  #endif
-}
-
-void CMainDialog::OnCbnSelchangeComboWeight()
-{
-  CString str;
-  CComboBox *cb;
-  int item;
-  int len;
-
-  cb = (CComboBox *) GetDlgItem(IDC_COMBO_WEIGHT);
-  item = cb->GetCurSel();
-  len = cb->GetLBTextLen(item);
-  cb->GetLBText(item, str.GetBuffer(len));
-  str.ReleaseBuffer();
-
-  if (str == "")                   m_weight = FW_DONTCARE;
-  else if (str == "Dünn")          m_weight = FW_THIN;
-  else if (str == "Extra Leicht")  m_weight = FW_ULTRALIGHT;
-  else if (str == "Leicht")        m_weight = FW_LIGHT;
-  else if (str == "Normal")        m_weight = FW_NORMAL;
-  else if (str == "Mittel")        m_weight = FW_MEDIUM;
-  else if (str == "Fast Fett")     m_weight = FW_SEMIBOLD;
-  else if (str == "Fett")          m_weight = FW_BOLD;
-  else if (str == "Extra Fett")    m_weight = FW_ULTRABOLD;
-  else if (str == "Wuchtig")       m_weight = FW_HEAVY;
-  else
-    m_weight = FW_NORMAL;
-
-  SetNewFont();
-}
-
-BOOL CMainDialog::PreTranslateMessage(MSG* pMsg)
-{
-  if (pMsg->message == WM_RBUTTONDOWN) {
-    CWnd *win = (CWnd *) GetDlgItem(IDC_FONTS_LIST);
-
-    CRect rect;
-    win->GetWindowRect(rect);
-
-    #ifdef _DEBUG
-      afxDump << pMsg->pt.x << " " << pMsg->pt.y << "\n";
-      afxDump << rect.left << " " << rect.top << " " << rect.right << " " << rect.bottom << "\n";
-    #endif
-
-    if (rect.PtInRect(pMsg->pt)) {
-      CMenu menu;
-      DWORD selection;
-
-      VERIFY(menu.LoadMenu(IDR_MENU_FONT_LIST));
-
-      CMenu *popup = menu.GetSubMenu(0);
-      ASSERT(popup != NULL);
-
-      selection = popup->TrackPopupMenu((TPM_LEFTALIGN | TPM_LEFTBUTTON |
-                                         TPM_NONOTIFY | TPM_RETURNCMD),
-                                        pMsg->pt.x, pMsg->pt.y, this);
-      popup->DestroyMenu();
-
-      switch (selection) {
-        case 0:
-          break;
-
-        case ID_CUSTOM_FONT_DIR:
-          break;
-
-        case ID_SYSTEM_FONT_DIR:
-          break;
-      }
-
-      return TRUE;
-    }
-  }
-
-  return CDialog::PreTranslateMessage(pMsg);
-}
-
-BOOL CMainDialog::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
-{
-  if (wParam == IDC_EXAMPLE_TEXT) {
-    MSGFILTER *lpMsgFilter = (MSGFILTER *) lParam;
-
-    if ( (lpMsgFilter->nmhdr.code == EN_MSGFILTER) &&
-         (lpMsgFilter->msg == WM_RBUTTONDOWN) )
-    {
-      afxDump << "Catched a reflected message.\n";
-
-
-    }
-  }
-
-  return CDialog::OnNotify(wParam, lParam, pResult);
-}
-
-void CMainDialog::OnCbnSelchangeComboHeight()
-{
-  CString str;
-  CComboBox *cb;
-  int item;
-  int len;
-
-  cb = (CComboBox *) GetDlgItem(IDC_COMBO_HEIGHT);
-  item = cb->GetCurSel();
-  len = cb->GetLBTextLen(item);
-  cb->GetLBText(item, str.GetBuffer(len));
-  str.ReleaseBuffer();
-
-  m_height = _ttoi(str);
-
-  if (m_height <= 0)
-    m_height = 1;
-
-  SetNewFont();
-}
-
-// Wird bei jedem Tastendruck aufgerufen.
-
-void CMainDialog::OnCbnEditchangeComboHeight()
-{
-  CString str;
-
-  m_combo_height.GetWindowText(str);
-
-  m_height = _ttoi(str);
-
-  if (m_height <= 0)
-    m_height = 1;
-
-  SetNewFont();
-}

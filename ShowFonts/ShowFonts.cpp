@@ -1,24 +1,7 @@
-// $Id: ShowFonts.cpp,v 1.1 2005/11/13 21:44:28 gerrit-albrecht Exp $
+// ShowFonts.cpp : Defines the class behaviors for the application.
 //
-// ShowFonts
-// Copyright (C) 2005 by Gerrit M. Albrecht
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-// MA 02110-1301, USA.
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ShowFonts.h"
 #include "MainDialog.h"
 
@@ -26,46 +9,85 @@
 #define new DEBUG_NEW
 #endif
 
+
 // CShowFonts
 
 BEGIN_MESSAGE_MAP(CShowFonts, CWinApp)
-	ON_COMMAND(ID_HELP, CWinApp::OnHelp)
+	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 
-// CShowFonts-Erstellung
+// CShowFonts construction
 
 CShowFonts::CShowFonts()
 {
-	// TODO: Hier Code zur Konstruktion einfügen
-	// Alle wichtigen Initialisierungen in InitInstance positionieren
+	EnableHtmlHelp();
+
+	// TODO: add construction code here,
+	// Place all significant initialization in InitInstance
 }
 
-// Das einzige CShowFonts-Objekt
+
+// The one and only CShowFonts object
 
 CShowFonts theApp;
 
+
+// CShowFonts initialization
+
 BOOL CShowFonts::InitInstance()
 {
-	// InitCommonControls() ist für Windows XP erforderlich, wenn ein Anwendungsmanifest
-	// die Verwendung von ComCtl32.dll Version 6 oder höher zum Aktivieren
-	// von visuellen Stilen angibt. Ansonsten treten beim Erstellen von Fenstern Fehler auf.
-
-  InitCommonControls();
-  AfxInitRichEdit();
+	// InitCommonControlsEx() is required on Windows XP if an application
+	// manifest specifies use of ComCtl32.dll version 6 or later to enable
+	// visual styles.  Otherwise, any window creation will fail.
+	INITCOMMONCONTROLSEX InitCtrls;
+	InitCtrls.dwSize = sizeof(InitCtrls);
+	// Set this to include all the common control classes you want to use
+	// in your application.
+	InitCtrls.dwICC = ICC_WIN95_CLASSES;
+	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
 
+	if (!AfxSocketInit())
+	{
+		AfxMessageBox(IDP_SOCKETS_INIT_FAILED);
+		return FALSE;
+	}
+
+	// Initialize OLE libraries
+	if (!AfxOleInit())
+	{
+		AfxMessageBox(IDP_OLE_INIT_FAILED);
+		return FALSE;
+	}
+
 	AfxEnableControlContainer();
 
-  SetRegistryKey(_T("G.A.S.I."));
+	// Standard initialization
+	// If you are not using these features and wish to reduce the size
+	// of your final executable, you should remove from the following
+	// the specific initialization routines you do not need
+	// Change the registry key under which our settings are stored
+	// TODO: You should modify this string to be something appropriate
+	// such as the name of your company or organization
+	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
 	CMainDialog dlg;
 	m_pMainWnd = &dlg;
-	(void) dlg.DoModal();
+	INT_PTR nResponse = dlg.DoModal();
+	if (nResponse == IDOK)
+	{
+		// TODO: Place code here to handle when the dialog is
+		//  dismissed with OK
+	}
+	else if (nResponse == IDCANCEL)
+	{
+		// TODO: Place code here to handle when the dialog is
+		//  dismissed with Cancel
+	}
 
-	// Da das Dialogfeld geschlossen wurde, FALSE zurückliefern, so dass wir die
-	// Anwendung verlassen, anstatt das Nachrichtensystem der Anwendung zu starten.
-
-  return FALSE;
+	// Since the dialog has been closed, return FALSE so that we exit the
+	//  application, rather than start the application's message pump.
+	return FALSE;
 }
