@@ -1,7 +1,24 @@
-// ShowFonts.cpp : Defines the class behaviors for the application.
+// $Id: ShowFonts.cpp,v 1.3 2006/01/30 10:47:51 gerrit-albrecht Exp $
 //
+// ShowFonts
+// Copyright (C) 2005 by Gerrit M. Albrecht
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+// MA 02110-1301, USA.
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "ShowFonts.h"
 #include "MainDialog.h"
 
@@ -9,31 +26,21 @@
 #define new DEBUG_NEW
 #endif
 
-
-// CShowFonts
-
 BEGIN_MESSAGE_MAP(CShowFonts, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
-
-// CShowFonts construction
+CShowFonts theApp;  // The one and only CShowFonts object
 
 CShowFonts::CShowFonts()
 {
-	EnableHtmlHelp();
+  EnableHtmlHelp();
 
-	// TODO: add construction code here,
-	// Place all significant initialization in InitInstance
+  // TODO: add construction code here,
+  // Place all significant initialization in InitInstance
 }
 
-
-// The one and only CShowFonts object
-
-CShowFonts theApp;
-
-
-// CShowFonts initialization
+// CShowFonts initialization.
 
 BOOL CShowFonts::InitInstance()
 {
@@ -71,18 +78,16 @@ BOOL CShowFonts::InitInstance()
 	// Change the registry key under which our settings are stored
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization
-	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
+	SetRegistryKey(_T("G.A.S.I."));
 
 	CMainDialog dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
-	if (nResponse == IDOK)
-	{
+	if (nResponse == IDOK) {
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with OK
 	}
-	else if (nResponse == IDCANCEL)
-	{
+	else if (nResponse == IDCANCEL) {
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with Cancel
 	}

@@ -9,6 +9,7 @@
 #define IDS_ABOUTBOX                    101
 #define IDD_SHOWFONTS_DIALOG            102
 #define IDD_SHOWFONTS                   102
+#define IDD_MAIN                        102
 #define IDP_SOCKETS_INIT_FAILED         103
 #define IDR_MAINFRAME                   128
 

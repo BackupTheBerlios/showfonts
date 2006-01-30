@@ -14,6 +14,7 @@
 #define HIDD_ABOUT                              0x20064
 #define HIDD_SHOWFONTS_DIALOG                   0x20066
 #define HIDD_SHOWFONTS                          0x20066
+#define HIDD_MAIN                               0x20066
  
 // Frame Controls (IDW_*) 
 // This is a part of the Microsoft Foundation Classes C++ library.

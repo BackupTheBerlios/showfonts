@@ -1,4 +1,4 @@
-// $Id: AboutDialog.h,v 1.1 2005/11/13 21:44:28 gerrit-albrecht Exp $
+// $Id: AboutDialog.h,v 1.2 2006/01/30 10:47:51 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -27,7 +27,7 @@ class CAboutDialog : public CDialog
   public:
     CAboutDialog ();
 
-	enum { IDD = IDD_ABOUT_DIALOG };
+	enum { IDD = IDD_ABOUT };
 
   protected:
     virtual void DoDataExchange (CDataExchange* pDX);
