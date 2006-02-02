@@ -204,7 +204,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Miraledon\Miraledon\src\MiraDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ShowFonts.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Miraledon\Miraledon\src\SizeGrip.cpp"
 				>
 			</File>
 			<File
@@ -246,6 +254,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Miraledon\Miraledon\src\MiraDialog.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
 				>
 				<FileConfiguration
@@ -271,6 +283,10 @@
 			</File>
 			<File
 				RelativePath=".\ShowFonts.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Miraledon\Miraledon\src\SizeGrip.h"
 				>
 			</File>
 			<File

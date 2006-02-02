@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.7 2006/01/30 15:10:37 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.8 2006/02/02 14:41:25 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -27,8 +27,19 @@
 #define new DEBUG_NEW
 #endif
 
-CMainDialog::CMainDialog(CWnd* pParent /*=NULL*/)
- : CDialog(CMainDialog::IDD, pParent)
+BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
+	ON_WM_SYSCOMMAND()
+	ON_WM_PAINT()
+	ON_WM_QUERYDRAGICON()
+	//}}AFX_MSG_MAP
+    ON_LBN_SELCHANGE(IDC_FONTS_LIST, &CMainDialog::OnLbnSelchangeFontsList)
+    ON_CBN_SELCHANGE(IDC_COMBO_WEIGHT, &CMainDialog::OnCbnSelchangeComboWeight)
+    ON_CBN_SELCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnSelchangeComboHeight)
+    ON_CBN_EDITCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnEditchangeComboHeight)
+END_MESSAGE_MAP()
+
+CMainDialog::CMainDialog(CWnd *parent /* =0 */)
+ : CMiraDialog(CMainDialog::IDD, parent)
 {
   EnableActiveAccessibility();
 
@@ -47,20 +58,12 @@ void CMainDialog::DoDataExchange(CDataExchange* pDX)
   DDX_Control(pDX, IDC_SPIN_HEIGHT, m_spin_height);
 }
 
-BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
-	ON_WM_SYSCOMMAND()
-	ON_WM_PAINT()
-	ON_WM_QUERYDRAGICON()
-	//}}AFX_MSG_MAP
-    ON_LBN_SELCHANGE(IDC_FONTS_LIST, &CMainDialog::OnLbnSelchangeFontsList)
-    ON_CBN_SELCHANGE(IDC_COMBO_WEIGHT, &CMainDialog::OnCbnSelchangeComboWeight)
-    ON_CBN_SELCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnSelchangeComboHeight)
-    ON_CBN_EDITCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnEditchangeComboHeight)
-END_MESSAGE_MAP()
-
 BOOL CMainDialog::OnInitDialog()
 {
   CDialog::OnInitDialog();
+
+  CreateSizeGrip(true);
+  CreateToolTip();
 
   // IDM_ABOUTBOX must be in the system command range.
 
@@ -69,7 +72,7 @@ BOOL CMainDialog::OnInitDialog()
 
   // Add "About..." menu item to system menu.
 
-  CMenu* pSysMenu = GetSystemMenu(FALSE);
+  CMenu *pSysMenu = GetSystemMenu(FALSE);
   if (pSysMenu != NULL) {
     CString strAboutMenu;
 
@@ -87,7 +90,7 @@ BOOL CMainDialog::OnInitDialog()
   SetIcon(m_icon, FALSE);                                            // Set small icon.
 
   // Tell our Rich-Text field that it shall reflect its messages
-  // to this dialog. I'm to lazy to make a subclass.
+  // to this dialog. I'm to lazy to make an extra subclass.
 
   m_example_text.SetEventMask(ENM_MOUSEEVENTS);
 
@@ -107,6 +110,11 @@ BOOL CMainDialog::OnInitDialog()
 
     OnLbnSelchangeFontsList();
   }
+
+  AddToolTips();
+
+  m_tooltip.AddTool(this, _T("TEST"));
+  m_tooltip.AddTool(GetDlgItem(IDOK), _T("OKAY"));
 
   return TRUE;                                                       // Return TRUE, unless you set the focus to a control.
 }
@@ -141,7 +149,7 @@ void CMainDialog::OnPaint()
 
     dc.DrawIcon(x, y, m_icon);                                       // Draw the icon.
   } else {
-    CDialog::OnPaint();
+    CMiraDialog::OnPaint();
   }
 }
 

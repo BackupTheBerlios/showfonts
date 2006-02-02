@@ -1,4 +1,4 @@
-// $Id: MainDialog.h,v 1.6 2006/01/30 15:10:37 gerrit-albrecht Exp $
+// $Id: MainDialog.h,v 1.7 2006/02/02 14:41:25 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -22,11 +22,12 @@
 
 #include "afxwin.h"
 #include "afxcmn.h"
+#include "MiraDialog.h"
 
-class CMainDialog : public CDialog
+class CMainDialog : public CMiraDialog
 {
   public:
-    CMainDialog(CWnd* pParent = NULL);
+    CMainDialog(CWnd *parent = 0);
 
     enum { IDD = IDD_SHOWFONTS_DIALOG };
 

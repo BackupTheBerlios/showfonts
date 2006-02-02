@@ -199,6 +199,11 @@ BEGIN
     IDP_SOCKETS_INIT_FAILED "Windows sockets initialization failed."
 END
 
+STRINGTABLE 
+BEGIN
+    IDC_COMBO_WEIGHT        "Allows to edit the weight of the font in the sample text field."
+END
+
 #endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 
