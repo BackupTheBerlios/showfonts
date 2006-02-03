@@ -235,6 +235,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath="..\..\Miraledon\Miraledon\src\TrayIcon.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -291,6 +295,10 @@
 			</File>
 			<File
 				RelativePath=".\StdAfx.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Miraledon\Miraledon\src\TrayIcon.h"
 				>
 			</File>
 		</Filter>

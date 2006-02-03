@@ -13,7 +13,6 @@
 // Resources (IDR_*) 
 #define HIDR_MENU_FONT_LIST                     0x20004
 #define HIDR_MAINFRAME                          0x20080
-#define HIDR_MENU1                              0x20081
  
 // Dialogs (IDD_*) 
 #define HIDD_ABOUTBOX                           0x20064
@@ -21,6 +20,7 @@
 #define HIDD_SHOWFONTS_DIALOG                   0x20066
 #define HIDD_SHOWFONTS                          0x20066
 #define HIDD_MAIN                               0x20066
+#define HIDD_OPTIONS                            0x20082
  
 // Frame Controls (IDW_*) 
 // This is a part of the Microsoft Foundation Classes C++ library.

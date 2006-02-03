@@ -68,6 +68,72 @@ IDR_MAINFRAME           ICON                    "res\\ShowFonts.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Gerrit M. Albrecht Softwareentwicklung und Internetdienstleistungen"
+            VALUE "FileDescription", "Font manager"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "ShowFonts.exe"
+            VALUE "LegalCopyright", "(c) 2005-2006 Gerrit M. Albrecht.  All rights reserved."
+            VALUE "OriginalFilename", "ShowFonts.exe"
+            VALUE "ProductName", "ShowFonts"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_FONT_LIST MENU 
+BEGIN
+    POPUP "X"
+    BEGIN
+        MENUITEM "Select a &Custom Font Directory ...", ID_CUSTOM_FONT_DIR
+        MENUITEM "Select the &System Font Directory", ID_SYSTEM_FONT_DIR
+    END
+END
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // Dialog
 //
 
@@ -105,43 +171,13 @@ BEGIN
     EDITTEXT        IDC_FILENAME,245,26,237,13,ES_AUTOHSCROLL | ES_READONLY,WS_EX_ACCEPTFILES
 END
 
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Version
-//
-
-VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
- FILEFLAGSMASK 0x3fL
-#ifdef _DEBUG
- FILEFLAGS 0x1L
-#else
- FILEFLAGS 0x0L
-#endif
- FILEOS 0x4L
- FILETYPE 0x1L
- FILESUBTYPE 0x0L
+IDD_OPTIONS DIALOGEX 0, 0, 326, 237
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
-        BLOCK "040904e4"
-        BEGIN
-            VALUE "CompanyName", "Gerrit M. Albrecht Softwareentwicklung und Internetdienstleistungen"
-            VALUE "FileDescription", "Font manager"
-            VALUE "FileVersion", "1.0.0.1"
-            VALUE "InternalName", "ShowFonts.exe"
-            VALUE "LegalCopyright", "(c) 2006 Gerrit M. Albrecht.  All rights reserved."
-            VALUE "OriginalFilename", "ShowFonts.exe"
-            VALUE "ProductName", "ShowFonts"
-            VALUE "ProductVersion", "1.0.0.1"
-        END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
-        VALUE "Translation", 0x409, 1252
-    END
+    DEFPUSHBUTTON   "OK",IDOK,112,216,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,194,216,50,14
 END
 
 
@@ -168,23 +204,16 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 298
     END
-END
-#endif    // APSTUDIO_INVOKED
 
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Menu
-//
-
-IDR_MENU_FONT_LIST MENU 
-BEGIN
-    POPUP "X"
+    IDD_OPTIONS, DIALOG
     BEGIN
-        MENUITEM "Select a &Custom Font Directory ...", ID_CUSTOM_FONT_DIR
-        MENUITEM "Select the &System Font Directory", ID_SYSTEM_FONT_DIR
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 319
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 230
     END
 END
+#endif    // APSTUDIO_INVOKED
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -204,7 +233,7 @@ BEGIN
     IDC_COMBO_WEIGHT        "Allows to edit the weight of the font in the sample text field."
 END
 
-#endif    // German (Germany) resources
+#endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

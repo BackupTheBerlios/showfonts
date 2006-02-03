@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.8 2006/02/02 14:41:25 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.9 2006/02/03 12:18:15 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -36,6 +36,8 @@ BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
     ON_CBN_SELCHANGE(IDC_COMBO_WEIGHT, &CMainDialog::OnCbnSelchangeComboWeight)
     ON_CBN_SELCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnSelchangeComboHeight)
     ON_CBN_EDITCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnEditchangeComboHeight)
+    ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_WEIGHT, &CMainDialog::OnDeltaposSpinWeight)
+    ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_HEIGHT, &CMainDialog::OnDeltaposSpinHeight)
 END_MESSAGE_MAP()
 
 CMainDialog::CMainDialog(CWnd *parent /* =0 */)
@@ -104,6 +106,9 @@ BOOL CMainDialog::OnInitDialog()
 
   m_combo_weight.SelectString(-1, _T("Normal"));
   m_combo_height.SelectString(-1, _T("50"));
+
+  m_spin_weight.SetBuddy(&m_combo_weight);
+  m_spin_height.SetBuddy(&m_combo_height);
 
   if (m_fonts_list.GetCount() > 0) {
     m_fonts_list.SetCurSel(0);                                       // Select first font in list.
@@ -328,4 +333,24 @@ void CMainDialog::OnCbnEditchangeComboHeight()
     m_height = 1;
 
   SetNewFont();
+}
+
+void CMainDialog::OnDeltaposSpinWeight(NMHDR *pNMHDR, LRESULT *pResult)
+{
+  LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+  // TODO: Add your control notification handler code here
+
+  TRACE("CMainDialog::OnDeltaposSpinWeight\n");
+
+  *pResult = 0;
+}
+
+void CMainDialog::OnDeltaposSpinHeight(NMHDR *pNMHDR, LRESULT *pResult)
+{
+  LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+  // TODO: Add your control notification handler code here
+
+
+
+  *pResult = 0;
 }

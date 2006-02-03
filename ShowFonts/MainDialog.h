@@ -1,4 +1,4 @@
-// $Id: MainDialog.h,v 1.7 2006/02/02 14:41:25 gerrit-albrecht Exp $
+// $Id: MainDialog.h,v 1.8 2006/02/03 12:18:15 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -23,6 +23,7 @@
 #include "afxwin.h"
 #include "afxcmn.h"
 #include "MiraDialog.h"
+#include "TrayIcon.h"
 
 class CMainDialog : public CMiraDialog
 {
@@ -32,16 +33,17 @@ class CMainDialog : public CMiraDialog
     enum { IDD = IDD_SHOWFONTS_DIALOG };
 
   public:
-    CFont           m_font;
-    CListBox        m_fonts_list;
-    CRichEditCtrl   m_example_text;
-    CComboBox       m_combo_weight;
-    CComboBox       m_combo_height;
-    CSpinButtonCtrl m_spin_weight;
-    CSpinButtonCtrl m_spin_height;
+    CFont           m_font;                      ///< The font object with the currently selected font.
+    CListBox        m_fonts_list;                ///< The fonts list on the left side of our dialog.
+    CRichEditCtrl   m_example_text;              ///< The example text area.
+    CComboBox       m_combo_weight;              ///< Contains predefined values for the font weight.
+    CComboBox       m_combo_height;              ///< Contains predefined values for the font height. 
+    CSpinButtonCtrl m_spin_weight;               ///< Changes the font's weight.
+    CSpinButtonCtrl m_spin_height;               ///< Sets the font's height with the mouse.
 
   protected:
     HICON           m_icon;
+    CTrayIcon       m_tray_icon;
     int             m_height;
     int             m_weight;
     CString         m_facename;
@@ -55,18 +57,15 @@ class CMainDialog : public CMiraDialog
     afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
     afx_msg void OnPaint();
     afx_msg HCURSOR OnQueryDragIcon();
+    virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
     DECLARE_MESSAGE_MAP()
 
   public:
     afx_msg void OnLbnSelchangeFontsList();
-public:
     afx_msg void OnCbnSelchangeComboWeight();
-public:
     afx_msg void OnCbnSelchangeComboHeight();
-protected:
-    virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
-public:
     virtual BOOL PreTranslateMessage(MSG* pMsg);
-public:
     afx_msg void OnCbnEditchangeComboHeight();
+    afx_msg void OnDeltaposSpinWeight(NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg void OnDeltaposSpinHeight(NMHDR *pNMHDR, LRESULT *pResult);
 };
