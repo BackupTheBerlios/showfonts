@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt,v 1.2 2006/02/03 13:23:08 gerrit-albrecht Exp $
+$Id: ChangeLog.txt,v 1.3 2006/02/03 14:03:14 gerrit-albrecht Exp $
 
 2006-01-03  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
 
@@ -6,6 +6,7 @@ $Id: ChangeLog.txt,v 1.2 2006/02/03 13:23:08 gerrit-albrecht Exp $
 	  map in CMainDialog pointed to CDialog.
 	* Bugfix: The size grip didn't moved around because it's created flag
 	  was never set to true.
+	* Changed all afxDump to TRACE(). Avoids errors during release builds.
 
 2006-01-02  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
 
