@@ -65,6 +65,7 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\ShowFonts.ico"
+IDI_ICON_TRAY           ICON                    "res\\icon_tray.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -159,11 +160,11 @@ BEGIN
     DEFPUSHBUTTON   "&Okay",IDOK,442,282,50,16
     PUSHBUTTON      "&Help",ID_HELP,385,282,50,16
     LISTBOX         IDC_FONTS_LIST,7,7,185,291,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "",IDC_EXAMPLE_TEXT,"RichEdit20A",ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP,202,154,290,121
+    CONTROL         "",IDC_EXAMPLE_TEXT,"RichEdit20A",ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_BORDER | WS_TABSTOP,202,154,290,121
     COMBOBOX        IDC_COMBO_WEIGHT,347,47,74,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     COMBOBOX        IDC_COMBO_HEIGHT,347,66,76,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "",IDC_SPIN_HEIGHT,"msctls_updown32",UDS_ARROWKEYS,425,65,13,14
-    CONTROL         "",IDC_SPIN_WEIGHT,"msctls_updown32",UDS_ARROWKEYS,423,44,13,14
+    CONTROL         "",IDC_SPIN_HEIGHT,"msctls_updown32",UDS_ARROWKEYS | WS_TABSTOP,425,65,13,14
+    CONTROL         "",IDC_SPIN_WEIGHT,"msctls_updown32",UDS_ARROWKEYS | WS_TABSTOP,423,44,13,14
     LTEXT           "Filename:",IDC_STATIC,208,31,32,8
     LTEXT           "Height:",IDC_STATIC,310,68,24,8
     LTEXT           "Pixels",IDC_STATIC,449,68,19,8
@@ -178,6 +179,7 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,112,216,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,194,216,50,14
+    LISTBOX         IDC_LIST1,6,6,78,204,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 END
 
 

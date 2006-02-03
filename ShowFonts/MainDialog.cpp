@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.9 2006/02/03 12:18:15 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.10 2006/02/03 15:00:18 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -27,7 +27,7 @@
 #define new DEBUG_NEW
 #endif
 
-BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
+BEGIN_MESSAGE_MAP(CMainDialog, CMiraDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
@@ -38,6 +38,8 @@ BEGIN_MESSAGE_MAP(CMainDialog, CDialog)
     ON_CBN_EDITCHANGE(IDC_COMBO_HEIGHT, &CMainDialog::OnCbnEditchangeComboHeight)
     ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_WEIGHT, &CMainDialog::OnDeltaposSpinWeight)
     ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_HEIGHT, &CMainDialog::OnDeltaposSpinHeight)
+    ON_WM_SIZE()
+    ON_WM_SIZING()
 END_MESSAGE_MAP()
 
 CMainDialog::CMainDialog(CWnd *parent /* =0 */)
@@ -265,7 +267,7 @@ BOOL CMainDialog::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 
     if ( (lpMsgFilter->nmhdr.code == EN_MSGFILTER) &&
          (lpMsgFilter->msg == WM_RBUTTONDOWN) ) {
-      afxDump << "Catched a reflected message.\n";
+      TRACE("Catched a reflected message.\n");
 
 
     }
@@ -296,8 +298,7 @@ BOOL CMainDialog::PreTranslateMessage(MSG* pMsg)
       CMenu *popup = menu.GetSubMenu(0);
       ASSERT(popup != NULL);
 
-      selection = popup->TrackPopupMenu((TPM_LEFTALIGN | TPM_LEFTBUTTON |
-                                         TPM_NONOTIFY | TPM_RETURNCMD),
+      selection = popup->TrackPopupMenu((TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_NONOTIFY | TPM_RETURNCMD),
                                         pMsg->pt.x, pMsg->pt.y, this);
       popup->DestroyMenu();
 
@@ -335,22 +336,27 @@ void CMainDialog::OnCbnEditchangeComboHeight()
   SetNewFont();
 }
 
+// Click on the weight spin control.
+
 void CMainDialog::OnDeltaposSpinWeight(NMHDR *pNMHDR, LRESULT *pResult)
 {
   LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-  // TODO: Add your control notification handler code here
 
-  TRACE("CMainDialog::OnDeltaposSpinWeight\n");
+  TRACE("CMainDialog::OnDeltaposSpinWeight: code=%d pos=%d delta=%d\n", pNMHDR->code, pNMUpDown->iPos, pNMUpDown->iDelta);
 
   *pResult = 0;
 }
 
+// Click on the height spin control.
+// pNMHDR->code is always -722 (IDC_SPIN_HEIGHT is 1005),
+// pNMUpDown->iPos (0..x), and
+// pNMUpDown->iDelta was 1 (down clicked) and -1 (up clicked).
+
 void CMainDialog::OnDeltaposSpinHeight(NMHDR *pNMHDR, LRESULT *pResult)
 {
   LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-  // TODO: Add your control notification handler code here
 
-
+  TRACE("CMainDialog::OnDeltaposSpinHeight: code=%d pos=%d delta=%d\n", pNMHDR->code, pNMUpDown->iPos, pNMUpDown->iDelta);
 
   *pResult = 0;
 }
