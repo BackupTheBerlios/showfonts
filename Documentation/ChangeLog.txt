@@ -1,4 +1,15 @@
-$Id: ChangeLog.txt,v 1.1 2006/01/30 10:12:12 gerrit-albrecht Exp $
+$Id: ChangeLog.txt,v 1.2 2006/02/03 13:23:08 gerrit-albrecht Exp $
+
+2006-01-03  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
+
+	* Bugfix: CMiraDialog::OnSize was never called because the message
+	  map in CMainDialog pointed to CDialog.
+	* Bugfix: The size grip didn't moved around because it's created flag
+	  was never set to true.
+
+2006-01-02  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
+
+	* Many new classes where introduced, but not fully implemented.
 
 2006-01-30  Gerrit M. Albrecht  <gerrit-albrecht@users.berlios.de>
 
