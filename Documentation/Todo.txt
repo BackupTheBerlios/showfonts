@@ -1,21 +1,22 @@
-$Id: Todo.txt,v 1.3 2006/02/03 13:26:16 gerrit-albrecht Exp $
+$Id: Todo.txt,v 1.4 2006/02/07 20:08:05 gerrit-albrecht Exp $
 
 Known bugs, errors and limitations of the code:
 
-* Retrieving the filename of a selected font is missing.
+- Retrieving the filename of a selected font is missing.
 
 Possible future enhancements:
 
-* Colors.
-* Font size.
-* Selecting a dir/file using a dialog or drag and drop.
-* Font categories to filter the list.
-* Predefined texts (e.g. all chars).
-* Resizable dialog.
-* Pasting own texts into the Editor.
-* Predefined Codepages.
-* Font property editor.
-* Print font overview.
-
-- Minimal dialog size.
+- Colors.
+- Font size.
+- Selecting a dir/file using a dialog or drag and drop.
+- Font categories to filter the list.
+- Predefined texts (e.g. all chars).
+- Resizable dialog.
+- Pasting own texts into the Editor.
+- Predefined Codepages.
+- Font property editor.
+- Print font overview.
+- Set minimal dialog size.
 - Hide size grip if it is destroying the content of controls.
+- Dynamically open requested fonts.
+
