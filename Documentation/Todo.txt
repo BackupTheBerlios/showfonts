@@ -1,4 +1,4 @@
-$Id: Todo.txt,v 1.4 2006/02/07 20:08:05 gerrit-albrecht Exp $
+$Id: Todo.txt,v 1.5 2006/02/08 20:47:49 gerrit-albrecht Exp $
 
 Known bugs, errors and limitations of the code:
 
@@ -12,6 +12,7 @@ Possible future enhancements:
 - Font categories to filter the list.
 - Predefined texts (e.g. all chars).
 - Resizable dialog.
+- Store dialog size and position.
 - Pasting own texts into the Editor.
 - Predefined Codepages.
 - Font property editor.
@@ -19,4 +20,4 @@ Possible future enhancements:
 - Set minimal dialog size.
 - Hide size grip if it is destroying the content of controls.
 - Dynamically open requested fonts.
-
+- Do we need a toolbar?
