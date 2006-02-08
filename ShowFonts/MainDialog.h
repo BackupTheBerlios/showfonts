@@ -1,4 +1,4 @@
-// $Id: MainDialog.h,v 1.8 2006/02/03 12:18:15 gerrit-albrecht Exp $
+// $Id: MainDialog.h,v 1.9 2006/02/08 12:31:43 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -22,10 +22,11 @@
 
 #include "afxwin.h"
 #include "afxcmn.h"
-#include "MiraDialog.h"
-#include "TrayIcon.h"
 
-class CMainDialog : public CMiraDialog
+#include <Miraledon/Dialog.h>
+#include <Miraledon/TrayIcon.h>
+
+class CMainDialog : public MDialog
 {
   public:
     CMainDialog(CWnd *parent = 0);
@@ -43,7 +44,7 @@ class CMainDialog : public CMiraDialog
 
   protected:
     HICON           m_icon;
-    CTrayIcon       m_tray_icon;
+    MTrayIcon       m_tray_icon;
     int             m_height;
     int             m_weight;
     CString         m_facename;

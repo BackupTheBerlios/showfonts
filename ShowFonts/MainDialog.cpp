@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.10 2006/02/03 15:00:18 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.11 2006/02/08 12:31:43 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -27,7 +27,7 @@
 #define new DEBUG_NEW
 #endif
 
-BEGIN_MESSAGE_MAP(CMainDialog, CMiraDialog)
+BEGIN_MESSAGE_MAP(CMainDialog, MDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
@@ -43,7 +43,7 @@ BEGIN_MESSAGE_MAP(CMainDialog, CMiraDialog)
 END_MESSAGE_MAP()
 
 CMainDialog::CMainDialog(CWnd *parent /* =0 */)
- : CMiraDialog(CMainDialog::IDD, parent)
+ : MDialog(CMainDialog::IDD, parent)
 {
   EnableActiveAccessibility();
 
@@ -156,7 +156,7 @@ void CMainDialog::OnPaint()
 
     dc.DrawIcon(x, y, m_icon);                                       // Draw the icon.
   } else {
-    CMiraDialog::OnPaint();
+    MDialog::OnPaint();
   }
 }
 

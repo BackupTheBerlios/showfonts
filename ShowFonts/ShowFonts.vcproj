@@ -196,15 +196,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\HyperlinkCtrl.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\MainDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\MiraDialog.cpp"
 				>
 			</File>
 			<File
@@ -213,10 +205,6 @@
 			</File>
 			<File
 				RelativePath=".\ShowFonts.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\SizeGrip.cpp"
 				>
 			</File>
 			<File
@@ -239,10 +227,6 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\TrayIcon.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -254,15 +238,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\HyperlinkCtrl.h"
-				>
-			</File>
-			<File
 				RelativePath=".\MainDialog.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\MiraDialog.h"
 				>
 			</File>
 			<File
@@ -298,15 +274,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\SizeGrip.h"
-				>
-			</File>
-			<File
 				RelativePath=".\StdAfx.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Miraledon\Miraledon\src\TrayIcon.h"
 				>
 			</File>
 		</Filter>
