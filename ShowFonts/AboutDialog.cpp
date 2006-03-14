@@ -1,4 +1,4 @@
-// $Id: AboutDialog.cpp,v 1.1 2005/11/13 21:44:28 gerrit-albrecht Exp $
+// $Id: AboutDialog.cpp,v 1.2 2006/03/14 14:42:02 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -25,6 +25,9 @@
 #define new DEBUG_NEW
 #endif
 
+BEGIN_MESSAGE_MAP(CAboutDialog, CDialog)
+END_MESSAGE_MAP()
+
 CAboutDialog::CAboutDialog ()
  : CDialog(CAboutDialog::IDD)
 {
@@ -34,6 +37,3 @@ void CAboutDialog::DoDataExchange (CDataExchange* pDX)
 {
   CDialog::DoDataExchange(pDX);
 }
-
-BEGIN_MESSAGE_MAP(CAboutDialog, CDialog)
-END_MESSAGE_MAP()

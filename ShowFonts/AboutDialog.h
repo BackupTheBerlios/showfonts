@@ -1,4 +1,4 @@
-// $Id: AboutDialog.h,v 1.2 2006/01/30 10:47:51 gerrit-albrecht Exp $
+// $Id: AboutDialog.h,v 1.3 2006/03/14 14:42:02 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -22,12 +22,17 @@
 
 #include "Resource.h"
 
+#include <Miraledon/HyperLinkCtrl.h>
+
 class CAboutDialog : public CDialog
 {
   public:
     CAboutDialog ();
 
 	enum { IDD = IDD_ABOUT };
+
+  protected:
+    MHyperlinkCtrl m_homepage_link;
 
   protected:
     virtual void DoDataExchange (CDataExchange* pDX);
