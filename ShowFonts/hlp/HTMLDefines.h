@@ -5,6 +5,8 @@
 #define HID_X_D                                 0x18004
 #define HID_CUSTOM_FONT_DIR                     0x18005
 #define HID_SYSTEM_FONT_DIR                     0x18006
+#define HID_Y_COLORS                            0x18007
+#define HID_EXAMPLE_TEXT_COLORS                 0x18008
  
 // Prompts (IDP_*) 
 #define HIDP_OLE_INIT_FAILED                    0x30064
@@ -13,6 +15,8 @@
 // Resources (IDR_*) 
 #define HIDR_MENU_FONT_LIST                     0x20004
 #define HIDR_MAINFRAME                          0x20080
+#define HIDR_MENU1                              0x20084
+#define HIDR_MENU_EXAMPLE_TEXT                  0x20084
  
 // Dialogs (IDD_*) 
 #define HIDD_ABOUTBOX                           0x20064

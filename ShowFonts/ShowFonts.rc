@@ -120,6 +120,14 @@ BEGIN
     END
 END
 
+IDR_MENU_EXAMPLE_TEXT MENU 
+BEGIN
+    POPUP "Y"
+    BEGIN
+        MENUITEM "Colors ...",                  ID_EXAMPLE_TEXT_COLORS
+    END
+END
+
 #endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 

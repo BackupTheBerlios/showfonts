@@ -15,6 +15,8 @@
 #define IDR_MAINFRAME                   128
 #define IDD_OPTIONS                     130
 #define IDI_ICON_TRAY                   131
+#define IDR_MENU1                       132
+#define IDR_MENU_EXAMPLE_TEXT           132
 #define IDC_FONTS_LIST                  1000
 #define IDC_EXAMPLE_TEXT                1002
 #define IDC_COMBO_WEIGHT                1003
@@ -24,18 +26,19 @@
 #define IDC_FILENAME                    1007
 #define IDC_LINK_HOMEPAGE               1008
 #define IDC_LIST1                       1009
-#define IDC_LIST2                       1010
 #define ID_X_C                          32771
 #define ID_X_D                          32772
 #define ID_CUSTOM_FONT_DIR              32773
 #define ID_SYSTEM_FONT_DIR              32774
+#define ID_Y_COLORS                     32775
+#define ID_EXAMPLE_TEXT_COLORS          32776
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        132
-#define _APS_NEXT_COMMAND_VALUE         32775
+#define _APS_NEXT_RESOURCE_VALUE        133
+#define _APS_NEXT_COMMAND_VALUE         32777
 #define _APS_NEXT_CONTROL_VALUE         1011
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

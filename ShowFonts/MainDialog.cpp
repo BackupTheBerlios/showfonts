@@ -1,4 +1,4 @@
-// $Id: MainDialog.cpp,v 1.11 2006/02/08 12:31:43 gerrit-albrecht Exp $
+// $Id: MainDialog.cpp,v 1.12 2006/03/14 14:42:23 gerrit-albrecht Exp $
 //
 // ShowFonts
 // Copyright (C) 2005 by Gerrit M. Albrecht
@@ -278,15 +278,18 @@ BOOL CMainDialog::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 
 BOOL CMainDialog::PreTranslateMessage(MSG* pMsg)
 {
-  if (pMsg->message == WM_RBUTTONDOWN) {
-    CWnd *win = (CWnd *) GetDlgItem(IDC_FONTS_LIST);
+  CWnd *win = 0;
+  CRect rect;
 
-    CRect rect;
+  if (pMsg->message == WM_RBUTTONDOWN) {
+    win = (CWnd *) GetDlgItem(IDC_FONTS_LIST);             // Fonts List.
+
     win->GetWindowRect(rect);
 
     #ifdef _DEBUG
-      afxDump << pMsg->pt.x << " " << pMsg->pt.y << "\n";
       afxDump << rect.left << " " << rect.top << " " << rect.right << " " << rect.bottom << "\n";
+      afxDump << "FONTS LIST: ";
+      afxDump << pMsg->pt.x << " " << pMsg->pt.y << "\n";
     #endif
 
     if (rect.PtInRect(pMsg->pt)) {
@@ -315,6 +318,41 @@ BOOL CMainDialog::PreTranslateMessage(MSG* pMsg)
 
       return TRUE;
     }
+
+    win = (CWnd *) GetDlgItem(IDC_EXAMPLE_TEXT);           // Example text box.
+
+    win->GetWindowRect(rect);
+
+    #ifdef _DEBUG
+      afxDump << "EXAMPLE TEXT: ";
+      afxDump << pMsg->pt.x << " " << pMsg->pt.y << "\n";
+    #endif
+
+    if (rect.PtInRect(pMsg->pt)) {
+      CMenu menu;
+      DWORD selection;
+
+      VERIFY(menu.LoadMenu(IDR_MENU_EXAMPLE_TEXT));
+
+      CMenu *popup = menu.GetSubMenu(0);
+      ASSERT(popup != NULL);
+
+      selection = popup->TrackPopupMenu((TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_NONOTIFY | TPM_RETURNCMD),
+                                        pMsg->pt.x, pMsg->pt.y, this);
+      popup->DestroyMenu();
+
+      switch (selection) {
+        case 0:
+          break;
+
+        case ID_EXAMPLE_TEXT_COLORS:
+          break;
+
+      }
+
+      return TRUE;
+    }
+
   }
 
   return CDialog::PreTranslateMessage(pMsg);
