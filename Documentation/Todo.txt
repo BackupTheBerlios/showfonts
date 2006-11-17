@@ -1,8 +1,10 @@
-$Id: Todo.txt,v 1.5 2006/02/08 20:47:49 gerrit-albrecht Exp $
+$Id: Todo.txt,v 1.6 2006/11/17 14:16:34 gerrit-albrecht Exp $
 
 Known bugs, errors and limitations of the code:
 
 - Retrieving the filename of a selected font is missing.
+- Browsing fonts shows the last selected font if SF was
+  unable to display a font.
 
 Possible future enhancements:
 
