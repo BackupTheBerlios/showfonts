@@ -1,0 +1,6 @@
+BuildLog.htm
+*.obj
+*.exp
+*.ilk
+*.lib
+*.pdb

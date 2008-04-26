@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShowFonts", "ShowFonts\ShowFonts.vcproj", "{6285A801-E33A-4170-97E2-3FA8A9F0608B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{680B9B67-C1C7-4E37-926E-26A79A7393A3} = {680B9B67-C1C7-4E37-926E-26A79A7393A3}
